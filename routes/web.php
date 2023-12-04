@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\WordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,12 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/createbook', [BookController::class, 'index'])->name('bookcreate');
     Route::post('/book', [BookController::class, 'store'])->name('store');
-    Route::get('/createword', [BookController::class, 'indexword']);
+    Route::get('/createword', [WordController::class, 'indexword'])->name('createword');
+    Route::get('/viewbook', [BookController::class, 'Bookview'])->name('bookview');
+    Route::post('/word', [WordController::class, 'store'])->name('wordstore');
     
 });
 
 require __DIR__.'/auth.php';
-
-// Route::get('/', function () {
-//     return view('LandingPage');
-// });

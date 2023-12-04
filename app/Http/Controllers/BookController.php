@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Yajra\DataTables\Facades\Datatables;
 
 class BookController extends Controller
 {
@@ -11,9 +12,24 @@ class BookController extends Controller
         return view('Book');
     }
 
-    public function indexword(){   
-        return view('CreateWord');
-    }
+    public function Bookview(Request $request){  
+        
+        if ($request->ajax()) {
+            $data = Book::select('*');
+            // dd("dfds");
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        return view('BookIndex');
+    } 
+        
 
     public function store(Request $request){
         // dd($request->all());
@@ -29,7 +45,7 @@ class BookController extends Controller
         $data->book = $request->book;
         $data->level = $request->level;
         $data->save();
-        return redirect('/Book');
+        return redirect('/viewbook');
      
     }
 }

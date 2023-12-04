@@ -3,10 +3,9 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Book View') }}
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -20,10 +19,8 @@
                                     <h1>View table</h1>
                                 </div>
                                 <div class="col">
-                                    <a href="{{route('createword')}}" class="edit btn btn-success btn-sm">Add Word</a>
-                                    <a href="{{route('bookview')}}" class="edit btn btn-success btn-sm">Manage Book</a>
+                                    <a href="{{route('bookcreate')}}" class="edit btn btn-success btn-sm">Add Book</a>
                                 </div>
-                                
                             </div>
                             <table class="table table-bordered data-table">
                                 <thead>
