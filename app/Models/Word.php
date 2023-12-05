@@ -13,7 +13,9 @@ class Word extends Model
     protected $fillable = [
         'word',
         'level',
+        'determinant',
         'BookCategory',
+        'LSFImage',
         'images',
         'Language',
     ];

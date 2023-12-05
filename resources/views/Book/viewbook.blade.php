@@ -38,8 +38,9 @@
 									<div class="form-group">
 										<label for="exampleInputEmail1">Level</label>
 										<select id="inputState" class="form-control" name="level">
-											<option name="H1">H1</option>
-											<option name="H2">H2</option>
+											<option name="crêche">Crêche</option>
+											<option name="1H">1H</option>
+											<option name="2H">2H</option>
 										</select>
 									</div>
 									<br>

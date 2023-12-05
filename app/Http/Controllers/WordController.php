@@ -12,7 +12,7 @@ class WordController extends Controller
     public function indexword()
     {
         $data = Book::select('*')->get();
-        return view('CreateWord', compact('data'));
+        return view('Word.CreateWord', compact('data'));
     }
 
     public function store(Request $request)
@@ -35,26 +35,42 @@ class WordController extends Controller
 
             $data = new Word([
                 "word" => $request->word,
+                "determinant" => $request->determinant,
                 "level" => $request->level,
                 "Language" => $request->Language,
                 "BookCategory" => $request->BookCategory,
                 "LSFImage" => $imageName,
             ]);
-
+            $data->save();
+        }
+        else{
+            $data = new Word([
+                "word" => $request->word,
+                "determinant" => $request->determinant,
+                "level" => $request->level,
+                "Language" => $request->Language,
+                "BookCategory" => $request->BookCategory,
+            ]);
+            // dd($data);
             $data->save();
         }
 
-        // if ($request->hasFile("images")) {
-        //     $files = $request->file("images");
-        //     foreach ($files as $file) {
-        //         $imageName = time() . '_' . $file->getClientOriginalName();
-        //         $request['Word_tbl_Id']=$data->id;
-        //         $request['images'] = $imageName;
-        //         $file->move(\public_path("/images"), $imageName);
-        //         Image::create($request->all());
-
-        //     }
-        // }
+        if ($request->hasFile("images")) {
+            $files = $request->file("images");
+            foreach ($files as $file) {
+                $imagesName = time() . '_' . $file->getClientOriginalName();
+                $request['Word_tbl_Id']=$data->id;
+                $request['images'] = $imagesName;
+                $file->move(\public_path("/images"), $imagesName);
+                $imageNames[] = $imagesName;
+                // Image::create($request->all());
+            }
+            $jsonEncodedImages = json_encode($imageNames);
+            Image::create([
+                'Word_tbl_Id' => $data->id, // Assuming $data is defined elsewhere
+                'images' => $jsonEncodedImages,
+            ]);
+        }
         return redirect('/dashboard');
     }
 }

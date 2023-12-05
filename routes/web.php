@@ -30,7 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/createbook', [BookController::class, 'index'])->name('bookcreate');
-    Route::post('/book', [BookController::class, 'store'])->name('store');
+    Route::post('/viewbook', [BookController::class, 'store'])->name('store');
+    Route::get('/editbook/{id}', [BookController::class, 'editbook'])->name('editcreate');
+    Route::post('/updatebook', [BookController::class, 'updatebook'])->name('updatebook');
     Route::get('/createword', [WordController::class, 'indexword'])->name('createword');
     Route::get('/viewbook', [BookController::class, 'Bookview'])->name('bookview');
     Route::post('/word', [WordController::class, 'store'])->name('wordstore');

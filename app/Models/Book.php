@@ -10,6 +10,6 @@ class Book extends Model
     use HasFactory;
     protected $table = 'Books';
     protected $fillable = [
-        'book','level'
+        'id','book','level'
     ];
 }

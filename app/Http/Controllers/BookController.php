@@ -5,29 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use Yajra\DataTables\Facades\Datatables;
+use Illuminate\Http\RedirectResponse;
 
 class BookController extends Controller
 {
     public function index(){   
-        return view('Book');
+        return view('Book.viewbook');
     }
 
     public function Bookview(Request $request){  
         
         if ($request->ajax()) {
             $data = Book::select('*');
-            // dd("dfds");
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
-                    $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a>';
+                ->addColumn('action', function($data){
+                    $actionBtn = '<a href="editbook/'.$data->Id.'" class="edit btn btn-success btn-sm">Edit</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
+        $books = Book::all();
 
-        return view('BookIndex');
+        return view('Book.BookIndex')->with('book',$books);
     } 
         
 
@@ -47,5 +48,31 @@ class BookController extends Controller
         $data->save();
         return redirect('/viewbook');
      
+    }
+
+    public function editbook($id)
+    {
+       $book=Book::findOrFail($id);
+        return view('Book.editbook')->with('books',$book);
+    }
+
+    public function updatebook(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'book' => 'required',
+
+        ]);
+
+
+        try {
+            // dd($request->all());
+            $book=Book::findOrFail($request->id);
+            $input = $request->all();
+            $book->update($input);  
+          
+        }  catch(\Exception $error) {
+            return back()->with('Error','Product Not Found')->with('Reason',$error->getMessage());
+        }
+        return redirect('/dashboard');
     }
 }
