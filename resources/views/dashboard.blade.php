@@ -29,8 +29,9 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>book</th>
+                                        <th>Word</th>
                                         <th>level</th>
+                                        <th>Language</th>
                                         <th width="105px">Action</th>
                                     </tr>
                                 </thead>
@@ -47,17 +48,19 @@
 <div class="jumbotron text-center mt-3" style="margin-bottom:0">
     <p>Footer</p>
 </div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $.noConflict();
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('bookview') }}",
+            ajax: "{{ route('wordview') }}",
             columns: [
-                { data: 'Id', name: 'Id' },
-                { data: 'Book', name: 'Book' },
-                { data: 'Level', name: 'Level' },
+                { data: 'id', name: 'id' },
+                { data: 'word', name: 'word' },
+                { data: 'level', name: 'level' },
+                { data: 'Language', name: 'Language' },
                 { data: 'action', name: 'action', orderable: false, searchable: false },
             ]
         });

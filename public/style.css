@@ -79,12 +79,13 @@ Version      : 1.0
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Lato:400,600,700");
 @import url("https://fonts.googleapis.com/css?family=Lora:400,700|Open+Sans|Unna:400,700&display=swap");
 
-.caret {
-  display: none;
+.multiselect-container .btn {
+  display: none !important;
 }
-.btn-group .multiselect {
-  border: 1px solid #ced4da;
+.multiselect-container .input-group{
+  margin: 0px;
 }
+
 
 body,
 p {
@@ -448,7 +449,7 @@ overlay search
   position: relative;
   z-index: 1200;
   display: inline-block;
-  float: right;
+  /* float: right; */
   top: 20px;
   right: 16px;
 }

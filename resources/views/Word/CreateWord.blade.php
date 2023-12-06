@@ -59,15 +59,21 @@
                                             </select>
                                         </div>
                                     </div>
-
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="inputState">Level</label>
-                                            <select class="selectpicker" multiple data-live-search="true">
-                                                <option>Mustard</option>
-                                                <option>Ketchup</option>
-                                                <option>Relish</option>
-                                            </select>
+                                            <label for="inputState">Sybb</label><br>
+                                            <select id="multiple-checkboxes" class="form-control dropup" multiple  > 
+                                            @foreach($data as $Books)
+                                                <option value="{{$Books->Book}}">{{$Books->Book}}</option>
+                                                @endforeach
+                                                <!-- <option value="php">PHP</option>
+                                                <option value="javascript">JavaScript</option>
+                                                <option value="java">Java</option>
+                                                <option value="sql">SQL</option>
+                                                <option value="jquery">Jquery</option>
+                                                <option value=".net">.Net</option> -->
+                                                
+                                        </select> 
                                         </div>
                                     </div>
 
@@ -105,9 +111,9 @@
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputState">Book</label>
-                                            <select id="inputState" class="form-control" name="BookCategory">
+                                            <select id="inputState" class="form-control" name="BookCategory" data-live-search="true">
                                                 @foreach($data as $Books)
-                                                <option name="1" value="{{$Books->Book}}">{{$Books->Book}}</option>
+                                                <option value="{{$Books->Book}}">{{$Books->Book}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -130,5 +136,17 @@
     <p>Footer</p>
 </div>
 
+<script>
 
-@endsection
+    $(document).ready(function() {
+        $('#multiple-checkboxes').multiselect({
+            nonSelectedText: 'Syllble',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonWidth:'450px',
+            maxHeight: 350,
+            
+        });
+        
+    });
+</script>
