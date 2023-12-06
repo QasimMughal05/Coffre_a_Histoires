@@ -860,55 +860,36 @@
     <div class="container p-3 my-3">
         <div class="post-body">
             <div class="entry-content">
-                <h1 class="mt-3 mb-3">My First Bootstrap Page</h1>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s,
-                    when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
-                    survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
-                    release of Letraset sheets containing Lorem Ipsum passages, and more recently
-                    with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum
-                    is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                    scrambled it to make a type specimen book. It has survived not only five centuries, but also the
-                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
-                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
-                    publishing software like Aldus
-                    PageMaker including versions of Lorem Ipsum.</p>
+            <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/pourqui_150.png" class="img-fluid" alt="Pour qui ?"></h1>
+            <p>Le <b>Coffre à Histoires</b> est destiné aux lieux d'accueil et aux classes intégrant des enfants sourds.</p>
             </div>
         </div>
     </div>
-    <div class="container p-3 my-3 bg-primary text-white">
-        <h1 class="mt-5 mb-3">My First Bootstrap Page</h1>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived
-            not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages, and more recently
-            with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-            dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-            type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-            containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.</p>
+    <div class="container p-3 my-3">
+        <div class="entry-content">
+            <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/pourquoi_150.png" class="img-fluid" alt="Pourquoi ?"></h1>
+            <p>Le <b>Coffre à Histoires</b> favorise la mise en situation permettant à l'enfant d'éxercer et d'élargir les 5 capacités transversales suivantes:</p>
+            <ul>
+                <li>la collaboration<li>
+                <li>la communication<li>
+                <li>les stratégies d'apprentissage<li>
+                <li>la pensée créatrice<li>
+                <li>la démarche réflexive<li>
+            </ul>
+            <p>Il peut aider à la définition du projet d'intégration.</p>
+        </div>
     </div>
     <div class="container p-3 my-3">
-        <h1 class="mt-5 mb-3">My First Bootstrap Page</h1>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s,
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived
-            not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages, and more recently
-            with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is
-            simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-            dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-            type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-            containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.</p>
+        <div class="entry-content">
+            <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/ou_150.png" class="img-fluid" alt="où ?"></h1>
+            <p>Dans les lieux d'accueil, avec la collaboration des éducateurs de la petite enfance (Sac à Histoires), et à l'école, avec la complicité des enseignants (Boîte à Histoires).</p>
+        </div>
+    </div>
+    <div class="container p-3 my-3">
+        <div class="entry-content">
+            <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/comment_150.png" class="img-fluid" alt="où ?"></h1>
+            <p>Dans les lieux d'accueil, avec la collaboration des éducateurs de la petite enfance (Sac à Histoires), et à l'école, avec la complicité des enseignants (Boîte à Histoires).</p>
+        </div>
     </div>
     <div class="jumbotron text-center" style="margin-bottom:0">
         <p>Footer</p>
