@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Coffre à Histoires</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -34,7 +34,7 @@
             -moz-tab-size: 4;
             tab-size: 4;
             font-family: Figtree, sans-serif;
-            font-feature-settings: normal
+            font-feature-settings: normal height: 100%;
         }
 
         body {
@@ -827,78 +827,202 @@
                 padding: 2rem
             }
         }
+
+        #footer {
+            height: 60px;
+            /* Your Footer height */
+        }
     </style>
 </head>
 @extends('layout')
+@vite(['resources/css/menu.css', 'resources/js/menu.js', 'resources/js/animate.css', 'resources/css/footer.css'])
 
 <body class="antialiased">
-    <div class="shrink-0 flex items-center pr-7 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <a href="#">
-            <img src="{{ URL::to('/') }}/images/logo_150.png" class="img-fluid" alt="Responsive image"
-                style="max-width: 60%;">
-            <!-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> -->
-        </a>
-    </div>
-    <!-- <div class="relativem min-h-screen bg-dots-darker bg-center dark:bg-dots-lighter dark:bg-white-900 selection:bg-red-500 selection:text-white"> -->
-    @if (Route::has('login'))
-    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
-        @auth
-        <a href="{{ url('/dashboard') }}"
-            class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
-        @else
-        <a href="{{ route('login') }}"
-            class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-            in</a>
+    <section class="ftco-section">
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light" id="ftco-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="{{ URL::to('/') }}/images/logo_300.png" class="img-fluid" alt="Responsive image"
+                        style="max-width: 60%;">
+                    <!-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> -->
+                </a>
 
-        @if (Route::has('register'))
-        <a href="{{ route('register') }}"
-            class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
-        @endif
-        @endauth
-    </div>
-    @endif
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                    aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fa fa-bars"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active"><a href="#" class="nav-link">Le projet</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Page</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                <a class="dropdown-item" href="#">Page 1</a>
+                                <a class="dropdown-item" href="#">Page 2</a>
+                                <a class="dropdown-item" href="#">Page 3</a>
+                                <a class="dropdown-item" href="#">Page 4</a>
+                            </div>
+                        </li>
+                        <li class="nav-item"><a href="#" class="nav-link">Catalog</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0">
+                        <div class="form-group d-flex">
+                            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                                @if (Route::has('login'))
+                                @auth
+                                <li class="nav-item active"><a href="{{ url('/dashboard') }}"
+                                        class="nav-link">Dashboard</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{{ route('login') }}" id="dropdown04"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My account</a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                        <a class="dropdown-item" href="#">Page 1</a>
+                                        <a class="dropdown-item" href="#">Page 2</a>
+                                        <a class="dropdown-item" href="#">Page 3</a>
+                                        <a class="dropdown-item" href="#">Page 4</a>
+                                    </div>
+                                </li>
+                                @else
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">Log in</a>
+                                </li>
+                                @if (Route::has('register'))
+                                <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Register</a>
+                                </li>
+                                @endif
+                                @endauth
+                                @endif
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <!-- END nav -->
+
+    </section>
     <div class="container p-3 my-3">
-        <div class="post-body">
-            <div class="entry-content">
-            <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/pourqui_150.png" class="img-fluid" alt="Pour qui ?"></h1>
-            <p>Le <b>Coffre à Histoires</b> est destiné aux lieux d'accueil et aux classes intégrant des enfants sourds.</p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="post-body">
+                    <div class="entry-content">
+                        <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/pourqui_150.png"
+                                class="img-fluid" alt="Pour qui ?"></h1>
+                        <p>Le <b>Coffre à Histoires</b> est destiné aux lieux d'accueil et aux classes intégrant des
+                            enfants sourds.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="entry-content col-md-6">
+                <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/pourquoi_150.png"
+                        class="img-fluid" alt="Pourquoi ?"></h1>
+                <p>Le <b>Coffre à Histoires</b> favorise la mise en situation permettant à l'enfant d'éxercer et
+                    d'élargir les 5 capacités transversales suivantes:</p>
+                <ul>
+                    <li>la collaboration
+                    <li>
+                    <li>la communication
+                    <li>
+                    <li>les stratégies d'apprentissage
+                    <li>
+                    <li>la pensée créatrice
+                    <li>
+                    <li>la démarche réflexive
+                    <li>
+                </ul>
+                <p>Il peut aider à la définition du projet d'intégration.</p>
             </div>
         </div>
-    </div>
-    <div class="container p-3 my-3">
-        <div class="entry-content">
-            <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/pourquoi_150.png" class="img-fluid" alt="Pourquoi ?"></h1>
-            <p>Le <b>Coffre à Histoires</b> favorise la mise en situation permettant à l'enfant d'éxercer et d'élargir les 5 capacités transversales suivantes:</p>
-            <ul>
-                <li>la collaboration<li>
-                <li>la communication<li>
-                <li>les stratégies d'apprentissage<li>
-                <li>la pensée créatrice<li>
-                <li>la démarche réflexive<li>
-            </ul>
-            <p>Il peut aider à la définition du projet d'intégration.</p>
+        <div class="row">
+            <div class="entry-content col-md-6">
+                <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/pourquoi_150.png"
+                        class="img-fluid" alt="Pourquoi ?"></h1>
+                <p>Le <b>Coffre à Histoires</b> favorise la mise en situation permettant à l'enfant d'éxercer et
+                    d'élargir les 5 capacités transversales suivantes:</p>
+                <ul>
+                    <li>la collaboration
+                    <li>
+                    <li>la communication
+                    <li>
+                    <li>les stratégies d'apprentissage
+                    <li>
+                    <li>la pensée créatrice
+                    <li>
+                    <li>la démarche réflexive
+                    <li>
+                </ul>
+                <p>Il peut aider à la définition du projet d'intégration.</p>
+            </div>
+            <div class="entry-content col-md-6">
+                <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/ou_150.png" class="img-fluid"
+                        alt="où ?"></h1>
+                <p>Dans les lieux d'accueil, avec la collaboration des éducateurs de la petite enfance (Sac à
+                    Histoires), et à l'école, avec la complicité des enseignants (Boîte à Histoires).</p>
+            </div>
         </div>
-    </div>
-    <div class="container p-3 my-3">
-        <div class="entry-content">
-            <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/ou_150.png" class="img-fluid" alt="où ?"></h1>
-            <p>Dans les lieux d'accueil, avec la collaboration des éducateurs de la petite enfance (Sac à Histoires), et à l'école, avec la complicité des enseignants (Boîte à Histoires).</p>
+
+        <div class="row">
+            <div class="entry-content col-md-12 d-flex justify-content-center"> <!-- Flexbox classes added here -->
+                <img src="{{ URL::to('/') }}/images/landingPage/books.png" class="img-fluid" alt="Pourquoi ?">
+            </div>
         </div>
+
+
     </div>
-    <div class="container p-3 my-3">
-        <div class="entry-content">
-            <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/comment_150.png" class="img-fluid" alt="où ?"></h1>
-            <p>Dans les lieux d'accueil, avec la collaboration des éducateurs de la petite enfance (Sac à Histoires), et à l'école, avec la complicité des enseignants (Boîte à Histoires).</p>
+
+    <footer class="footer-59391">
+
+        <div class="container">
+
+
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    <div class="site-logo">
+                        <a href="#">Fondation a-capella</a>
+                    </div>
+                </div>
+                <!--<div class="col-md-8 text-md-right">
+                    <ul class="list-unstyled social-icons">
+                        <li><a href="#" class="fb"><span class="icon-facebook"></span></a></li>
+                        <li><a href="#" class="tw"><span class="icon-twitter"></span></a></li>
+                        <li><a href="#" class="in"><span class="icon-instagram"></span></a></li>
+                        <li><a href="#" class="be"><span class="icon-behance"></span></a></li>
+                        <li><a href="#" class="dr"><span class="icon-dribbble"></span></a></li>
+                        <li><a href="#" class="yt"><span class="icon-play"></span></a></li>
+                    </ul>
+                </div>-->
+            </div>
+
+            <div class="row mb-5">
+                <div class="col-md-6 ">
+                    <ul class="nav-links list-unstyled nav-left">
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 text-md-right">
+                    <ul class="nav-links list-unstyled nav-right">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Our works</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col ">
+                    <div class="copyright">
+                        <p><small>Copyright {{ now()->year }}. Tous droits réservés.</small></p>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
-    <div class="jumbotron text-center" style="margin-bottom:0">
-        <p>Footer</p>
-    </div>
-
-
-
-    <!-- </div> -->
-
+    </footer>
 
 </body>
 
