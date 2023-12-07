@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/createword', [WordController::class, 'indexword'])->name('createword');
     Route::get('/viewbook', [BookController::class, 'Bookview'])->name('bookview');
     Route::post('/word', [WordController::class, 'store'])->name('wordstore');
+    Route::get('/viewword', [WordController::class, 'Wordview'])->name('wordview');
     
 });
 

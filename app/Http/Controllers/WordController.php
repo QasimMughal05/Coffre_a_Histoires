@@ -6,6 +6,7 @@ use App\Models\Word;
 use App\Models\Image;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\Datatables;
 
 class WordController extends Controller
 {
@@ -14,6 +15,24 @@ class WordController extends Controller
         $data = Book::select('*')->get();
         return view('Word.CreateWord', compact('data'));
     }
+
+    public function Wordview(Request $request){  
+        
+        if ($request->ajax()) {
+            $data = Word::select('*');
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($data){
+                    $actionBtn = '<a href="editbook/'.$data->Id.'" class="edit btn btn-success btn-sm">Edit</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        $words = Word::all();
+
+        return view('dashboard')->with('word',$words);
+    } 
 
     public function store(Request $request)
     {
