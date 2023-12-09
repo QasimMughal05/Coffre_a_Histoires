@@ -14,6 +14,7 @@ class Word extends Model
         'word',
         'level',
         'determinant',
+        'Syllab',
         'BookCategory',
         'LSFImage',
         'images',
