@@ -20,10 +20,11 @@
                                     <h1>View table</h1>
                                 </div>
                                 <div class="col">
+                                @if(Auth::user()->user_type == 1)
                                     <a href="{{route('createword')}}" class="edit btn btn-success btn-sm">Add Word</a>
+                                @endif
                                     <a href="{{route('bookview')}}" class="edit btn btn-success btn-sm">Manage Book</a>
                                 </div>
-                                
                             </div>
                             <table class="table table-bordered data-table">
                                 <thead>
@@ -32,7 +33,9 @@
                                         <th>Word</th>
                                         <th>level</th>
                                         <th>Language</th>
-                                        <th width="105px">Action</th>
+                                        @if(Auth::user()->user_type == 1)
+                                            <th width="105px">Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -52,17 +55,25 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $.noConflict();
+
+        var commonColumns = [
+            { data: 'id', name: 'id' },
+            { data: 'word', name: 'word' },
+            { data: 'level', name: 'level' },
+            { data: 'Language', name: 'Language' }
+        ];
+        var actionColumn = { data: 'action', name: 'action', orderable: false, searchable: false };
+
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('wordview') }}",
-            columns: [
-                { data: 'id', name: 'id' },
-                { data: 'word', name: 'word' },
-                { data: 'level', name: 'level' },
-                { data: 'Language', name: 'Language' },
-                { data: 'action', name: 'action', orderable: false, searchable: false },
-            ]
+            columns: @if(Auth::user()->user_type == 1)
+            [...commonColumns, actionColumn]
+            @else
+                commonColumns
+            @endif
+
         });
 
     });

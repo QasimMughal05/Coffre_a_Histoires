@@ -18,9 +18,11 @@
                                 <div class="col">
                                     <h1>View table</h1>
                                 </div>
+                                @if(Auth::user()->user_type == 1)
                                 <div class="col">
                                     <a href="{{route('bookcreate')}}" class="edit btn btn-success btn-sm">Add Book</a>
                                 </div>
+                                    @endif
                             </div>
                             <table class="table table-bordered data-table">
                                 <thead>
@@ -28,7 +30,9 @@
                                         <th>No</th>
                                         <th>book</th>
                                         <th>level</th>
-                                        <th width="105px">Action</th>
+                                        @if(Auth::user()->user_type == 1)
+                                            <th width="105px">Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,16 +52,23 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $.noConflict();
+
+        var commonColumns = [
+            { data: 'Id', name: 'Id' },
+            { data: 'Book', name: 'Book' },
+            { data: 'Level', name: 'Level' },
+        ];
+        var actionColumn = { data: 'action', name: 'action', orderable: false, searchable: false };
+
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('bookview') }}",
-            columns: [
-                { data: 'Id', name: 'Id' },
-                { data: 'Book', name: 'Book' },
-                { data: 'Level', name: 'Level' },
-                { data: 'action', name: 'action', orderable: false, searchable: false },
-            ]
+            columns: @if(Auth::user()->user_type == 1)
+            [...commonColumns, actionColumn]
+            @else
+                commonColumns
+            @endif
         });
 
     });
