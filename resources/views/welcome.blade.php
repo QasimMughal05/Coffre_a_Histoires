@@ -889,10 +889,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">Log in</a>
                                 </li>
-                                @if (Route::has('register'))
-                                <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Register</a>
-                                </li>
-                                @endif
                                 @endauth
                                 @endif
                             </ul>
