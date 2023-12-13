@@ -15,6 +15,11 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                   @if(Auth::user()->user_type == 1)
+                        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                            Add Register
+                        </x-nav-link>
+                       @endif
                 </div>
             </div>
 
