@@ -9,6 +9,7 @@ use App\Models\syllable;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\Datatables;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class WordController extends Controller
 {
@@ -27,8 +28,16 @@ class WordController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $actionBtn = '<a href="editword/' . $data->id . '" class="edit btn btn-success btn-sm">Edit</a>';
-                    return $actionBtn;
+                    if(Auth::user()->user_type == 1){
+                        $actionBtn = '<a href="editword/' . $data->id . '" class="edit btn btn-success btn-sm">Edit</a>';
+                        $viewBtn = '<a href="ViewBooksWord/' . $data->id . '" class="view btn btn-success btn-sm mt-1">View</a>';
+                        return  $actionBtn .' '.$viewBtn;
+                        
+                    }else{
+                        $viewBtn = '<a href="ViewBooksWord/' . $data->id . '" class="view btn btn-info btn-sm">View</a>';
+                        return $viewBtn;
+                    }
+                    
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -54,13 +63,14 @@ class WordController extends Controller
         if ($request->hasFile("LSFImage")) {
             $file = $request->file("LSFImage");
             $imageName = time() . '_' . $file->getClientOriginalName();
-            $file->move(\public_path("LSFImage/"), $imageName);
+            $file->move(\public_path("image/"), $imageName);
 
             $Syllab = $request->Syllab;
             $Syllabs = implode(',', $Syllab);
 
             $data = new Word([
                 "word" => $request->word,
+                "word_type" => $request->word_type,
                 "determinant" => $request->determinant,
                 "level" => $request->level,
                 "Syllab" => $Syllabs,
@@ -76,6 +86,7 @@ class WordController extends Controller
 
             $data = new Word([
                 "word" => $request->word,
+                "word_type" => $request->word_type,
                 "determinant" => $request->determinant,
                 "level" => $request->level,
                 "Syllab" => $Syllabs,
@@ -86,19 +97,14 @@ class WordController extends Controller
         }
 
         if ($request->hasFile("images")) {
-            $files = $request->file("images");
-            foreach ($files as $file) {
-                $imagesName = time() . '_' . $file->getClientOriginalName();
-                $request['Word_tbl_Id'] = $data->id;
-                $request['images'] = $imagesName;
-                $file->move(\public_path("/images"), $imagesName);
-                $imageNames[] = $imagesName;
+            $imageNames = [];
+        
+            foreach ($request->file("images") as $file) {
+                $imageName = time() . '_' . $file->getClientOriginalName();
+                $file->move(\public_path("images/"), $imageName);
+                $imageNames[] = $imageName;
             }
-            $jsonEncodedImages = json_encode($imageNames);
-            Image::create([
-                'Word_tbl_Id' => $data->id, // Assuming $data is defined elsewhere
-                'images' => $jsonEncodedImages,
-            ]);
+            $data->update(['images' => json_encode($imageNames)]);
         }
         return redirect('/dashboard');
     }
@@ -122,10 +128,24 @@ class WordController extends Controller
             
             $input = $request->all();
             if (isset($input['Syllab']) && is_array($input['Syllab'])) {
-                // Implode the array into a comma-separated string
                 $input['Syllab'] = implode(',', $input['Syllab']);
             }
-            // dd($input);
+            if ($request->hasFile("LSFImage")) {
+                $file = $request->file("LSFImage");
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path("images/"), $fileName);
+                $input['LSFImage'] = $fileName;
+            } 
+            if ($request->hasFile("images")) {
+                $imageNames = [];
+            
+                foreach ($request->file("images") as $file) {
+                    $imageName = time() . '_' . $file->getClientOriginalName();
+                    $file->move(\public_path("images/"), $imageName);
+                    $imageNames[] = $imageName;
+                }
+                $input['images'] = json_encode($imageNames);
+            }
             $word->update($input);
 
         } catch (\Exception $error) {

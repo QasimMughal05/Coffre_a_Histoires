@@ -37,6 +37,15 @@
                                             aria-describedby="productName" name="word">
                                     </div>
                                     <div class="form-group">
+                                        <label for="exampleInputEmail1">Word Type</label>
+                                        <select id="inputState" class="form-control" name="word_type">
+                                            <option name="a">a</option>
+                                            <option name="f">f</option>
+                                            <option name="m">m</option>
+                                            <option name="v">v</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="exampleInputEmail1">Determinant</label>
                                         <select id="inputState" class="form-control" name="determinant">
                                             <option name="L'">L'</option>

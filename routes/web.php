@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/wordview', [WordViewController::class, 'index'])->name('wordtableview');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -41,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/viewword', [WordController::class, 'Wordview'])->name('wordview');
     Route::get('/editword/{id}', [WordController::class, 'editword'])->name('editword')->middleware('check.role');
     Route::post('/updateword', [WordController::class, 'updateword'])->name('updateword');
+    Route::get('/ViewBooksWord/{id}', [WordViewController::class, 'AllBooksWord']);
 
 });
 

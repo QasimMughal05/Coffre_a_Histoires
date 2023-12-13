@@ -12,12 +12,13 @@ class Word extends Model
     protected $table = 'Word_tbl';
     protected $fillable = [
         'word',
+        'word_type',
         'level',
         'determinant',
         'Syllab',
+        'images',
         'BookCategory',
         'LSFImage',
-        'images',
         'Language',
     ];
     public function images(){

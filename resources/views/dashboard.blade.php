@@ -3,7 +3,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Words') }}
         </h2>
     </x-slot>
 
@@ -17,7 +17,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <h1>View table</h1>
+                                    <h1>Word table</h1>
                                 </div>
                                 <div class="col">
                                 @if(Auth::user()->user_type == 1)
@@ -26,16 +26,14 @@
                                     <a href="{{route('bookview')}}" class="edit btn btn-success btn-sm">Manage Book</a>
                                 </div>
                             </div>
-                            <table class="table table-bordered data-table">
+                            <table class="table table-bordered data-table ">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Word</th>
                                         <th>level</th>
                                         <th>Language</th>
-                                        @if(Auth::user()->user_type == 1)
-                                            <th width="105px">Action</th>
-                                        @endif
+                                        <th width="105px">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,24 +53,17 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $.noConflict();
-
-        var commonColumns = [
-            { data: 'id', name: 'id' },
-            { data: 'word', name: 'word' },
-            { data: 'level', name: 'level' },
-            { data: 'Language', name: 'Language' }
-        ];
-        var actionColumn = { data: 'action', name: 'action', orderable: false, searchable: false };
-
         var table = $('.data-table').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('wordview') }}",
-            columns: @if(Auth::user()->user_type == 1)
-            [...commonColumns, actionColumn]
-            @else
-                commonColumns
-            @endif
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'word', name: 'word' },
+                { data: 'level', name: 'level' },
+                { data: 'Language', name: 'Language' },
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+            ]
 
         });
 

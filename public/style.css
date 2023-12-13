@@ -85,6 +85,11 @@ Version      : 1.0
 .multiselect-container .input-group{
   margin: 0px;
 }
+.vertical-text {
+  writing-mode: vertical-rl; /* vertical right-to-left */
+  text-orientation: mixed; /* for mixed Latin and East Asian characters */
+  transform: scale(-1, -1); /* optional: flip the text to make it readable */
+}
 
 
 body,
@@ -93,8 +98,8 @@ p {
   line-height: 26px;
   font-size: 16px;
   text-rendering: optimizeLegibility;
-  color: #666;
-  font-weight: 400;
+  color: #5c5a5a;
+  /* font-weight: 400; */
 }
 
 html {
@@ -163,10 +168,6 @@ h6,
 
 /* 1.2. Common styles
 ================================================== */
-body {
-  background: #fff;
-  color: #575769;
-}
 
 html,
 body {
@@ -254,13 +255,39 @@ blockquote {
   font-size: 13px;
   border: 1px solid #000;
 }
+.dataTables_paginate .paginate_button.current{
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  text-decoration:none ;
+  cursor: pointer;
+}
 
+.paginate_button {
+  border-radius: 0px;
+  padding: 6px 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #6a6767;
+  transition: 350ms;
+  letter-spacing: 1px;
+  font-size: 12px;
+  border: 1px solid #ccc;
 
+}
+.paginate_button:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+  text-decoration:none ;
+  cursor: pointer;
+}
 
 .btn-primary:hover {
   background: #000;
   color: #fff;
   border-color: #000;
+
 }
 
 .btn-dark {

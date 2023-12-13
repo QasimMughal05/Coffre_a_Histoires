@@ -73,6 +73,6 @@ class BookController extends Controller
         }  catch(\Exception $error) {
             return back()->with('Error','Product Not Found')->with('Reason',$error->getMessage());
         }
-        return redirect('/dashboard');
+        return redirect('/viewbook');
     }
 }
