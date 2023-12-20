@@ -1,5 +1,5 @@
 @extends('layout')
-<div class="container-fluid pt-5"
+<div class="container-fluid position-relative pt-5"
     style="background-image:url('{{$backgroundColor}}'); background-position: center;background-repeat: no-repeat;background-size: cover;height:48%">
     <div class="container mt-5">
         <div class="row text-center">
@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="container" style="margin-top:4em;">
+    <div class="container position-relative" style="margin-top:4em; positio">
         <div class="row justify-content-center">
             <div class="col-md-2">
                 <div class="thumbnail">
@@ -54,4 +54,4 @@
         </div>
     </div>
     <p class="vertical-text ml-3 position-absolute top-0 start-0"
-        style=" margin-top: -10em;z-index: 1; white-space: nowrap;"> {{$words->BookCategory}}</p>
+        style=" margin-top: -23em;z-index: 1; white-space: nowrap;"> {{$words->BookCategory}}</p>
