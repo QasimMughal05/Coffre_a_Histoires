@@ -17,7 +17,7 @@
                     </x-nav-link>
                    @if(Auth::user()->user_type == 1)
                         <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
-                            Add Register
+                            Add User
                         </x-nav-link>
                        @endif
                 </div>

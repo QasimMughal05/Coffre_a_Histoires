@@ -86,12 +86,10 @@ Version      : 1.0
   margin: 0px;
 }
 .vertical-text {
-  writing-mode: vertical-rl; /* vertical right-to-left */
-  text-orientation: mixed; /* for mixed Latin and East Asian characters */
-  transform: scale(-1, -1); /* optional: flip the text to make it readable */
+  writing-mode: vertical-rl; 
+  text-orientation: mixed; 
+  transform: scale(-1, -1);
 }
-
-
 body,
 p {
   font-family: "Open Sans", sans-serif;

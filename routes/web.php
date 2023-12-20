@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/editword/{id}', [WordController::class, 'editword'])->name('editword')->middleware('check.role');
     Route::post('/updateword', [WordController::class, 'updateword'])->name('updateword');
     Route::get('/ViewBooksWord/{id}', [WordViewController::class, 'AllBooksWord']);
+    Route::get('/generatepdf/{id}', [WordViewController::class, 'generatepdf'])->name('generatepdf');
 
 });
 

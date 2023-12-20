@@ -28,16 +28,16 @@ class WordController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    if(Auth::user()->user_type == 1){
+                    if (Auth::user()->user_type == 1) {
                         $actionBtn = '<a href="editword/' . $data->id . '" class="edit btn btn-success btn-sm">Edit</a>';
                         $viewBtn = '<a href="ViewBooksWord/' . $data->id . '" class="view btn btn-success btn-sm mt-1">View</a>';
-                        return  $actionBtn .' '.$viewBtn;
-                        
-                    }else{
+                        return $actionBtn . ' ' . $viewBtn;
+
+                    } else {
                         $viewBtn = '<a href="ViewBooksWord/' . $data->id . '" class="view btn btn-info btn-sm">View</a>';
                         return $viewBtn;
                     }
-                    
+
                 })
                 ->rawColumns(['action'])
                 ->make(true);
@@ -49,24 +49,23 @@ class WordController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        $rules = [
+        $request->validate([
             'word' => 'required|max:255',
-            'images.*' => 'required|image|mimes:jpeg,jpg,png,gif,svg|max:5120',
+            'Illustration' => 'required|image|mimes:svg,jpg,jpeg|max:10240',
+            'Language' => 'required|in:lpc,lsf',
+            
+            'Syllab' => $request->Language === 'lpc' ? 'required|array' : 'nullable',
+        ]);
+        
+        
 
-        ];
-        $validator = \Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return redirect()->route('createword')->withErrors($validator)->withInput();
-        }
-
-        if ($request->hasFile("LSFImage")) {
-            $file = $request->file("LSFImage");
+        if ($request->Language == 'lpc') {
+            $file = $request->file("Illustration");
             $imageName = time() . '_' . $file->getClientOriginalName();
-            $file->move(\public_path("image/"), $imageName);
+            $file->move(\public_path("cards-illustrations/"), $imageName);
 
             $Syllab = $request->Syllab;
-            $Syllabs = implode(',', $Syllab);
+            $Syllabs = implode(',', $Syllab ?? []);
 
             $data = new Word([
                 "word" => $request->word,
@@ -76,35 +75,35 @@ class WordController extends Controller
                 "Syllab" => $Syllabs,
                 "Language" => $request->Language,
                 "BookCategory" => $request->BookCategory,
-                "LSFImage" => $imageName,
+                "Illustration" => '/cards-illustrations/' . $imageName,
             ]);
 
             $data->save();
         } else {
-            $Syllab = $request->Syllab;
-            $Syllabs = implode(',', $Syllab);
-
+            $file = $request->file("Illustration");
+            $imageName = time() . '_' . $file->getClientOriginalName();
+            $file->move(\public_path("cards-illustrations/"), $imageName);
             $data = new Word([
                 "word" => $request->word,
                 "word_type" => $request->word_type,
                 "determinant" => $request->determinant,
                 "level" => $request->level,
-                "Syllab" => $Syllabs,
+                "Illustration" => '/cards-illustrations/' . $imageName,
                 "Language" => $request->Language,
                 "BookCategory" => $request->BookCategory,
             ]);
             $data->save();
         }
 
-        if ($request->hasFile("images")) {
+        if ($request->hasFile("lsf_images_paths")) {
             $imageNames = [];
-        
-            foreach ($request->file("images") as $file) {
+
+            foreach ($request->file("lsf_images_paths") as $file) {
                 $imageName = time() . '_' . $file->getClientOriginalName();
-                $file->move(\public_path("images/"), $imageName);
-                $imageNames[] = $imageName;
+                $file->move(public_path("lsf-images/"), $imageName);
+                $imageNames[] = '/lsf-images/' . $imageName;
             }
-            $data->update(['images' => json_encode($imageNames)]);
+            $data->update(['lsf_images_paths' => implode('|', $imageNames)]);
         }
         return redirect('/dashboard');
     }
@@ -119,32 +118,33 @@ class WordController extends Controller
 
     public function updateword(Request $request): RedirectResponse
     {
+        // dd($request->all());
         $request->validate([
             'word' => 'required',
         ]);
 
         try {
             $word = Word::findOrFail($request->id);
-            
+
             $input = $request->all();
             if (isset($input['Syllab']) && is_array($input['Syllab'])) {
                 $input['Syllab'] = implode(',', $input['Syllab']);
             }
-            if ($request->hasFile("LSFImage")) {
-                $file = $request->file("LSFImage");
+            if ($request->hasFile("Illustration")) {
+                $file = $request->file("Illustration");
                 $fileName = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path("images/"), $fileName);
-                $input['LSFImage'] = $fileName;
-            } 
-            if ($request->hasFile("images")) {
+                $file->move(public_path("cards-illustrations/"), $fileName);
+                $input['Illustration'] = '/cards-illustrations/' . $fileName;
+            }
+            if ($request->hasFile("lsf_images_paths")) {
                 $imageNames = [];
-            
-                foreach ($request->file("images") as $file) {
+
+                foreach ($request->file("lsf_images_paths") as $file) {
                     $imageName = time() . '_' . $file->getClientOriginalName();
-                    $file->move(\public_path("images/"), $imageName);
-                    $imageNames[] = $imageName;
+                    $file->move(\public_path("lsf-images/"), $imageName);
+                    $imageNames[] = '/lsf-images/' . $imageName;
                 }
-                $input['images'] = json_encode($imageNames);
+                $input['lsf_images_paths'] = implode('|', $imageNames);
             }
             $word->update($input);
 

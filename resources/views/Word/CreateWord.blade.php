@@ -47,8 +47,8 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Determinant</label>
-                                        <select id="inputState" class="form-control" name="determinant">
-                                            <option name="L'">L'</option>
+                                        <select id="inputState" class="form-control" name="determinant" >
+                                            <option name="L'" selected>L'</option>
                                             <option name="Un">Un</option>
                                             <option name="Les">Les</option>
                                             <option name="La">La</option>
@@ -68,9 +68,21 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-row">
+                                    <div class="form-check form-check-inline" id="lcp">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="Language" value="lpc"
+                                                id="inlineRadio1" value="option1" checked>LPC
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="Language" value="lsf"
+                                                id="inlineRadio1" value="option2">LSF
+                                        </label>
+                                    </div>
+                                    <div class="form-row mt-3" id="syllab">
                                         <div class="form-group col-md-6">
-                                            <label for="inputState">Sybb</label><br>
+                                            <label for="inputState">Syllab</label><br>
                                             <select id="multiple-checkboxes" name="Syllab[]" class="form-control dropup"
                                                 multiple>
                                                 @foreach($syllabl as $Syllab)
@@ -79,36 +91,16 @@
                                             </select>
                                         </div>
                                     </div>
-
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="Language" value="LPC"
-                                                id="inlineRadio1" value="option1" checked>LPC
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="Language" value="LSF"
-                                                id="inlineRadio1" value="option2">LSF
-                                        </label>
-                                    </div>
-                                    <div class="form-group mt-3">
-                                        <label for="exampleInputEmail1">Images LPC</label>
+                                    <div class="form-group mt-3" id="Illustration">
+                                        <label for="exampleInputEmail1">Illustration</label>
                                         <div class="custom-file">
-                                            <input id="input-2" name="images[]" type="file"
-                                                class="form-control @error('image.*') is-invalid @enderror"
-                                                data-show-upload="false" data-show-caption="true" multiple>
-
-                                            @error('images.*')
-                                            <span class="text-danger">{{ $message }}</span>
-                                            @enderror
+                                            <input id="input-2" name="Illustration" type="file" class="form-control" data-show-upload="false" data-show-caption="true">
                                         </div>
                                     </div>
-                                    <div class="form-group mt-3">
+                                    <div class="form-group mt-3" id="inputlsf">
                                         <label for="exampleInputEmail1">LSF</label>
                                         <div class="custom-file">
-                                            <input id="input-2" name="LSFImage" type="file" class="file"
-                                                data-show-upload="false" data-show-caption="true">
+                                            <input id="input-2" name="lsf_images_paths[]" type="file" class="form-control" data-show-upload="false" data-show-caption="true" multiple>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -152,5 +144,19 @@
 
         });
 
+        $("#inputlsf").hide();
+
+        $('input[type="radio"]').change(function () {
+            if ($(this).val() == "lpc") {
+                $("#syllab").show();
+                $("#Illustration").show();
+                $("#inputlsf").hide();
+            } else if ($(this).val() == "lsf") {
+                $("#syllab").hide();
+                $("#inputlsf").show();
+                $("#Illustration").show();
+            }
+        });
+        $('input[value="LPC"]').trigger('change');
     });
 </script>

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Image;
+use App\Models\syllable;
 
 class Word extends Model
 {
@@ -16,12 +16,12 @@ class Word extends Model
         'level',
         'determinant',
         'Syllab',
-        'images',
+        'Illustration',
         'BookCategory',
-        'LSFImage',
+        'lsf_images_paths',
         'Language',
     ];
-    public function images(){
-        return $this->hasMany(Image::class);
+    public function syllable(){
+        return $this->hasMany(syllable::class);
     }
 }

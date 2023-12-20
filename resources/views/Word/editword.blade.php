@@ -13,22 +13,22 @@
                 <div class="p-6 text-gray-900">
                     <div class="container">
                         @if (session('Error'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('Error') }}
-                            </div>
+                        <div class="alert alert-success" role="alert">
+                            {{ session('Error') }}
+                        </div>
                         @endif
                         <div class="row">
                             <div class="col-6 mx-auto">
                                 <form method="post" action="{{ route('updateword') }}" enctype="multipart/form-data">
                                     <input type="text" name="id" hidden="" value="{{$words->id}}">
                                     @if ($errors->any())
-                                        <div class="alert alert-danger">
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                     @endif
                                     @csrf
                                     <div class="form-group">
@@ -48,7 +48,8 @@
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Determinant</label>
                                         <select id="inputState" class="form-control" name="determinant">
-                                            <option name="L'" value="" {{ $words->determinant == "L' " ? 'selected' : '' }} >L'
+                                            <option name="L'" value="" {{ $words->determinant == "L' " ? 'selected' : ''
+                                                }} >L'
                                             </option>
                                             <option name="Un" {{ $words->determinant == 'Un' ? 'selected' : '' }}>Un
                                             </option>
@@ -62,7 +63,8 @@
                                             </option>
                                             <option name="Une " {{ $words->determinant == 'Une' ? 'selected' : '' }}>Une
                                             </option>
-                                            <option name="De la" {{ $words->determinant == 'De la' ? 'selected' : ''}}>De la
+                                            <option name="De la" {{ $words->determinant == 'De la' ? 'selected' :
+                                                ''}}>De la
                                             </option>
                                         </select>
                                     </div>
@@ -70,7 +72,8 @@
                                         <div class="form-group col-md-6">
                                             <label for="inputState">Level</label>
                                             <select id="inputState" class="form-control" name="level">
-                                                <option name="crêche" {{ $words->level == 'crêche' ? 'selected' : ''}}>crêche
+                                                <option name="crêche" {{ $words->level == 'crêche' ? 'selected' :
+                                                    ''}}>crêche
                                                 </option>
                                                 <option name="1H" {{ $words->level == '1H' ? 'selected' : '' }}>1H
                                                 </option>
@@ -79,63 +82,80 @@
                                             </select>
                                         </div>
                                     </div>
+                                    @if($words->Syllab)
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label for="inputState">Sybb</label><br>
                                             <select id="multiple-checkboxes" name="Syllab[]" class="form-control dropup"
                                                 multiple>
                                                 @foreach($syllabless as $syllabl)
-                                                    {{$selectedsyllabl = $syllabl->Syllab}}
-                                                    <option name="{{$syllabl->syllable}}" {{ in_array($syllabl->syllable,
-                                                        explode(',', $words->Syllab)) ? 'selected' : ''}}>{{$syllabl->syllable}}
-                                                    </option>
+                                                {{$selectedsyllabl = $syllabl->Syllab}}
+                                                <option name="{{$syllabl->syllable}}" {{ in_array($syllabl->syllable,
+                                                    explode(',', $words->Syllab)) ? 'selected' :
+                                                    ''}}>{{$syllabl->syllable}}
+                                                </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
-                                    @if($images = json_decode($words->Images))
-                                        <div class="form-check form-check-inline">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="radio" name="Language" value="LPC"
-                                                    id="inlineRadio1" value="option1" {{ $words->Language == 'LPC' ?
-                                                'checked' : '' }}>LPC
-                                            </label>
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="Language" value="lpc"
+                                                id="inlineRadio1" value="option1" {{ $words->Language == 'lpc' ?
+                                            'checked' : '' }}>LPC
+                                        </label>
+                                    </div>
+                                    <div class="form-group mt-3" id="Illustration">
+                                        <label for="exampleInputEmail1">Illustration</label>
+                                        <div class="custom-file">
+                                            <input id="input-2" name="Illustration" type="file" class="form-control"
+                                                data-show-upload="false" data-show-caption="true">
                                         </div>
-                                        <div class="form-group mt-3">
-                                            <label for="exampleInputEmail1">Images LPC</label>
+                                    </div>
+                                    <div class="mt-3">
+                                        <label>Illustration:</label>
+                                        <div>
+                                            <img src="{{ asset('/cards-illustrations/'. $words->Illustration) }}"
+                                                alt="Current Image" style="width: 14%;">
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if($words->lsf_images_paths)
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" name="Language" value="lsf"
+                                                id="inlineRadio1" value="option2" {{ $words->Language == 'lsf' ?
+                                            'checked' : '' }}>LSF
+                                        </label>
+                                    </div>
+                                    <div class="form-group mt-3" id="inputlsf">
+                                        <label for="exampleInputEmail1">LSF</label>
+                                        <div class="custom-file">
+                                            <input id="input-2" name="lsf_images_paths[]" type="file"
+                                                class="form-control" data-show-upload="false" data-show-caption="true"
+                                                multiple>
+                                        </div>
+                                        <!-- <div class="mt-3">
+                                                <label>LSF:</label>
+                                                <div>
+                                                    <img src="{{ asset('/lsf-images/'. $words->lsf_images_paths) }}" alt="Illustration" style="width: 14%;">
+                                                </div>
+                                            </div> -->
+                                        <div class="form-group mt-3" id="Illustration">
+                                            <label for="exampleInputEmail1">Illustration</label>
                                             <div class="custom-file">
-                                                <input id="input-2" name="images[]" type="file"
-                                                    class="form-control @error('image.*') is-invalid @enderror"
-                                                    data-show-upload="false" data-show-caption="true" multiple>
+                                                <input id="input-2" name="Illustration" type="file" class="form-control"
+                                                    data-show-upload="false" data-show-caption="true">
                                             </div>
                                         </div>
                                         <div class="mt-3">
-                                            <label>LPC Image:</label>
+                                            <label>Illustration:</label>
                                             <div>
-                                                @foreach ($images as $image)
-                                                    <img src="{{ asset('/images/'. $image) }}" alt="Current Image" style="width: 14%;">
-                                                @endforeach
+                                                <img src="{{ asset('/cards-illustrations/'. $words->Illustration) }}"
+                                                    alt="Illustration" style="width: 14%;">
                                             </div>
                                         </div>
-                                    @endif
-                                    @if($words->LSFImage)
-                                        <div class="form-check form-check-inline">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input" type="radio" name="Language" value="LSF" id="inlineRadio1" value="option2" {{ $words->Language == 'LSF' ? 'checked' : '' }}>LSF
-                                            </label>
-                                        </div>
-                                        <div class="form-group mt-3">
-                                            <label for="exampleInputEmail1">LSF</label>
-                                            <div class="custom-file">
-                                                <input id="input-2" name="LSFImage" type="file" class="file" data-show-upload="false" data-show-caption="true">
-                                            </div>
-                                            <div class="mt-3">
-                                                <label>LSF Image:</label>
-                                                <div>
-                                                    <img src="{{ asset('/images/'. $words->LSFImage) }}" alt="Current Image" style="width: 14%;">
-                                                </div>
-                                            </div>
-                                        </div>
+                                    </div>
                                     @endif
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
@@ -143,9 +163,10 @@
                                             <select id="inputState" class="form-control" name="BookCategory"
                                                 data-live-search="true">
                                                 @foreach($book as $Books)
-                                                    {{$selectedbook = $Books->Book }}
-                                                    <option name="{{$Books->Book}}" {{ $words->BookCategory == $selectedbook ? 'selected' : '' }}>{{$Books->Book}}
-                                                    </option>
+                                                {{$selectedbook = $Books->Book }}
+                                                <option name="{{$Books->Book}}" {{ $words->BookCategory == $selectedbook
+                                                    ? 'selected' : '' }}>{{$Books->Book}}
+                                                </option>
                                                 @endforeach
                                             </select>
                                         </div>
