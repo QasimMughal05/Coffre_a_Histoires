@@ -19,3 +19,5 @@ yarn-error.log
 .buildpath
 /.project
 /.settings/
+/public/build
+/public/build/*

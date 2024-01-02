@@ -835,7 +835,7 @@
     </style>
 </head>
 @extends('layout')
-@vite(['resources/css/menu.css', 'resources/js/menu.js', 'resources/js/animate.css', 'resources/css/footer.css'])
+@vite(['resources/css/menu.css', 'resources/js/menu.js', 'resources/css/animate.css', 'resources/css/footer.css'])
 
 <body class="antialiased">
     <section class="ftco-section">
