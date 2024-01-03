@@ -3,7 +3,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Words') }}
+            {{ __('messages.words') }}
         </h2>
     </x-slot>
 
@@ -17,23 +17,23 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <h1>Word table</h1>
+                                    <h1>{{ __('messages.word_table') }}</h1>
                                 </div>
                                 <div class="col">
                                 @if(Auth::user()->user_type == 1)
-                                    <a href="{{route('createword')}}" class="edit btn btn-success btn-sm">Add Word</a>
+                                    <a href="{{route('createword')}}" class="edit btn btn-success btn-sm">{{ __('messages.word_add') }}</a>
                                 @endif
-                                    <a href="{{route('bookview')}}" class="edit btn btn-success btn-sm">Manage Book</a>
+                                    <a href="{{route('bookview')}}" class="edit btn btn-success btn-sm">{{ __('messages.manage_books') }}</a>
                                 </div>
                             </div>
                             <table class="table table-bordered data-table ">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Word</th>
-                                        <th>level</th>
-                                        <th>Language</th>
-                                        <th width="105px">Action</th>
+                                        <th>{{ __('messages.word_no') }}</th>
+                                        <th>{{ __('messages.word_title') }}</th>
+                                        <th>{{ __('messages.word_level') }}</th>
+                                        <th>{{ __('messages.word_lang') }}</th>
+                                        <th width="105px">{{ __('messages.word_action') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

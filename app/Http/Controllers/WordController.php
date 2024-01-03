@@ -29,8 +29,8 @@ class WordController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
                     if (Auth::user()->user_type == 1) {
-                        $actionBtn = '<a href="editword/' . $data->id . '" class="edit btn btn-success btn-sm">Edit</a>';
-                        $viewBtn = '<a href="ViewBooksWord/' . $data->id . '" class="view btn btn-success btn-sm mt-1">View</a>';
+                        $actionBtn = '<a href="editword/' . $data->id . '" class="edit btn btn-success btn-sm">'.__('messages.word_action_edit').'</a>';
+                        $viewBtn = '<a href="ViewBooksWord/' . $data->id . '" class="view btn btn-success btn-sm mt-1">'.__('messages.word_action_view').'</a>';
                         return $actionBtn . ' ' . $viewBtn;
 
                     } else {
