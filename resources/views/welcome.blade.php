@@ -934,23 +934,11 @@
         </div>
         <div class="row">
             <div class="entry-content col-md-6">
-                <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/pourquoi_150.png"
+                <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/comment_150.png"
                         class="img-fluid" alt="Pourquoi ?"></h1>
-                <p>Le <b>Coffre à Histoires</b> favorise la mise en situation permettant à l'enfant d'éxercer et
-                    d'élargir les 5 capacités transversales suivantes:</p>
-                <ul>
-                    <li>la collaboration
-                    <li>
-                    <li>la communication
-                    <li>
-                    <li>les stratégies d'apprentissage
-                    <li>
-                    <li>la pensée créatrice
-                    <li>
-                    <li>la démarche réflexive
-                    <li>
-                </ul>
-                <p>Il peut aider à la définition du projet d'intégration.</p>
+                <p>Une fois par semaine, une codeuse-interprète en LPC et un unseignant en LSF sont attendus par les enfants.<br/>
+            Le moment ritualisé par la boîte à musique annonce le début de l'histoire.<br/>
+        Lue à haute voix, elle est accompagnée de LPC et/ou de LSF, afin d'être bien comprise par tous.</p>
             </div>
             <div class="entry-content col-md-6">
                 <h1 class="mt-3 mb-3"> <img src="{{ URL::to('/') }}/images/landingPage/ou_150.png" class="img-fluid"
