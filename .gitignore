@@ -20,3 +20,4 @@ yarn-error.log
 /.project
 /.settings/
 /public/build
+public/build/manifest.json
