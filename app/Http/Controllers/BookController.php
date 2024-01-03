@@ -20,7 +20,7 @@ class BookController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($data){
-                    $actionBtn = '<a href="editbook/'.$data->Id.'" class="edit btn btn-success btn-sm">Edit</a>';
+                    $actionBtn = '<a href="editbook/'.$data->Id.'" class="edit btn btn-success btn-sm">'.__('messages.book_action_edit').'</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

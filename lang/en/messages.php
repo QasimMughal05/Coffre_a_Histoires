@@ -22,6 +22,7 @@ return [
     'book_title' => 'Title',
     'book_level' => 'Level',
     'book_action' => 'Action',
+    'book_action_edit' => 'Edit',
     'book_add' => 'Add a book',
 
 ];
