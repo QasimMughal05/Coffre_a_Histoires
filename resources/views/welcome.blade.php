@@ -854,7 +854,7 @@
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active"><a href="#" class="nav-link">Le projet</a></li>
-                        <li class="nav-item dropdown">
+                        <!--<li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">Page</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -866,24 +866,24 @@
                         </li>
                         <li class="nav-item"><a href="#" class="nav-link">Catalog</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>-->
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <div class="form-group d-flex">
                             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                                 @if (Route::has('login'))
                                 @auth
-                                <li class="nav-item active"><a href="{{ url('/dashboard') }}"
+                                <li class="nav-item"><a href="{{ url('/dashboard') }}"
                                         class="nav-link">Dashboard</a></li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="{{ route('login') }}" id="dropdown04"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My account</a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdown04">
+                                    <!--<div class="dropdown-menu" aria-labelledby="dropdown04">
                                         <a class="dropdown-item" href="#">Page 1</a>
                                         <a class="dropdown-item" href="#">Page 2</a>
                                         <a class="dropdown-item" href="#">Page 3</a>
                                         <a class="dropdown-item" href="#">Page 4</a>
-                                    </div>
+                                    </div>-->
                                 </li>
                                 @else
                                 <li class="nav-item">
