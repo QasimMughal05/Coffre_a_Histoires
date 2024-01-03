@@ -21,3 +21,8 @@ yarn-error.log
 /.settings/
 /public/build
 /public/build/*
+/public/build/manifest.json
+public/build/manifest.json
+public/build/assets/*
+public/build/manifest.json
+public/build/assets/

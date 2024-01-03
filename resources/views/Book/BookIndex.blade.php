@@ -3,7 +3,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Book View') }}
+            {{ __('messages.book_view_title') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -16,22 +16,22 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col">
-                                    <h1>View table</h1>
+                                    <h1>{{ __('messages.book_table') }}</h1>
                                 </div>
                                 @if(Auth::user()->user_type == 1)
                                 <div class="col">
-                                    <a href="{{route('bookcreate')}}" class="edit btn btn-success btn-sm">Add Book</a>
+                                    <a href="{{route('bookcreate')}}" class="edit btn btn-success btn-sm">{{ __('messages.book_add') }}</a>
                                 </div>
                                     @endif
                             </div>
                             <table class="table table-bordered data-table">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>book</th>
-                                        <th>level</th>
+                                        <th>{{ __('messages.book_no') }}</th>
+                                        <th>{{ __('messages.book_title') }}</th>
+                                        <th>{{ __('messages.book_level') }}</th>
                                         @if(Auth::user()->user_type == 1)
-                                            <th width="105px">Action</th>
+                                            <th width="105px">{{ __('messages.book_action') }}</th>
                                         @endif
                                     </tr>
                                 </thead>
