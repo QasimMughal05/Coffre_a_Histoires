@@ -7,7 +7,7 @@ use App\Models\Image;
 use App\Models\Book;
 use App\Models\syllable;
 use Illuminate\Http\Request;
-use Yajra\DataTables\Facades\Datatables;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
