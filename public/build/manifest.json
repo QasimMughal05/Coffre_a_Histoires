@@ -19,6 +19,10 @@
     "isEntry": true,
     "src": "resources/css/menu.css"
   },
+  "resources/js/app.css": {
+    "file": "assets/app-620bd4a0.css",
+    "src": "resources/js/app.css"
+  },
   "resources/js/app.js": {
     "css": [
       "assets/app-620bd4a0.css"
