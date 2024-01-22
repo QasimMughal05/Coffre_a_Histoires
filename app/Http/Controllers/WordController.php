@@ -49,6 +49,7 @@ class WordController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'word' => 'required|max:255',
             'Illustration' => 'required|image|mimes:svg,jpg,jpeg|max:10240',
@@ -111,9 +112,12 @@ class WordController extends Controller
     public function editword($id)
     {
         $word = Word::findOrFail($id);
+        $syllables = explode(',', $word->Syllab);
         $data = Book::all();
-        $syllabl = syllable::select('*')->get();
-        return view('Word.editword')->with('words', $word)->with('book', $data)->with('syllabless', $syllabl);
+        $syllabless = Syllable::select('*')->get();
+    
+        return view('Word.editword')->with('words', $word)->with('book', $data)->with('syllabless', $syllables);
+    
     }
 
     public function updateword(Request $request): RedirectResponse

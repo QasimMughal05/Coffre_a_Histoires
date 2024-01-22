@@ -82,18 +82,15 @@
                                             </select>
                                         </div>
                                     </div>
-                                    @if($words->Syllab)
+                                    @if($words->Syllab)                                   
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
-                                            <label for="inputState">Sybb</label><br>
-                                            <select id="multiple-checkboxes" name="Syllab[]" class="form-control dropup"
-                                                multiple>
-                                                @foreach($syllabless as $syllabl)
-                                                {{$selectedsyllabl = $syllabl->Syllab}}
-                                                <option name="{{$syllabl->syllable}}" {{ in_array($syllabl->syllable,
-                                                    explode(',', $words->Syllab)) ? 'selected' :
-                                                    ''}}>{{$syllabl->syllable}}
-                                                </option>
+                                            <label for="inputState">Syllab</label><br>
+                                            <select id="multiple-checkboxes" name="Syllab[]" style="width: 500px;" data-reorder="1" multiple>
+                                                @foreach($syllabless as $syllable)
+                                                    <option name="{{ $syllable }}" {{ in_array($syllable, $syllabless) ? 'selected' : '' }}>
+                                                        {{ $syllable }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -192,13 +189,17 @@
 <script>
 
     $(document).ready(function () {
-        $('#multiple-checkboxes').multiselect({
-            nonSelectedText: 'Syllble',
-            enableFiltering: true,
-            enableCaseInsensitiveFiltering: true,
-            buttonWidth: '450px',
-            maxHeight: 350,
+        $("select").select2({
+            tags: true
+        });
 
+        $("#multiple-checkboxes").on("select2:select", function (evt) {
+        var element = evt.params.data.element;
+        var $element = $(element);
+        
+        $element.detach();
+        $(this).append($element);
+        $(this).trigger("change");
         });
 
     });
